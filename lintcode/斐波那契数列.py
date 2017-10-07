@@ -28,5 +28,32 @@ class Solution(object):
 			a,b=b,a+b
 		return b
 
+	def pow(self,n):
+		matrix=[[1,1],[1,0]]
+		if n==1:
+			return matrix
+		if n%2==0:
+			matrix=self.pow(n/2)
+			matrix=self.calmatrix(matrix,matrix)
+		if n%2==1:
+			matrix=self.pow((n-1)/2)
+			matrix=self.calmatrix(matrix,matrix)
+			matrix=self.calmatrix(matrix,[[1,1],[1,0]])
+		return matrix
+
+	def calmatrix(self,matrix1,matrix2):
+		res=[[1,1],[1,0]]
+		res[0][0]=matrix1[0][0]*matrix2[0][0]+matrix1[0][1]*matrix2[1][0]
+		res[0][1]=matrix1[0][0]*matrix2[0][1]+matrix1[0][1]*matrix2[1][1]
+		res[1][0]=matrix1[1][0]*matrix2[0][0]+matrix1[1][1]*matrix2[1][0]
+		res[1][1]=matrix1[1][0]*matrix2[0][1]+matrix1[1][1]*matrix2[1][1]
+		return res
 
 	def Fib3(self,n):
+		if n==1:
+			return 0
+		if n==2:
+			return 1
+		res=self.pow(n-2)
+		return res[0][0]
+
