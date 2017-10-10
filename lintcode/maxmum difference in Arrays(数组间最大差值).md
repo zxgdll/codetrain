@@ -38,3 +38,23 @@ public:
     }
 };
 ```
+
+```python
+class Solution:
+    """
+    @param: : an array of arrays
+    @return: return the max distance among arrays
+    """
+
+    def maxDiff(self, arrs):
+        # write your code here
+        maxval=arrs[0][len(arrs[0])-1]
+        minval=arrs[0][0]
+        res=0
+        arrs.pop(0)
+        for item in arrs:
+            res=max(max(res,maxval-item[0]),item[-1]-minval)
+            maxval=max(maxval,item[-1])
+            minval=min(minval,item[0])
+        return res
+```
